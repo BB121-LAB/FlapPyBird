@@ -1,3 +1,6 @@
+Modified to support pyinstaller single-file building
+
+
 FlapPyBird
 ===============
 

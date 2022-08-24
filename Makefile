@@ -1,0 +1,2 @@
+all:
+	pyinstaller ./flappy.spec

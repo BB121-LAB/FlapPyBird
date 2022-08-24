@@ -2,8 +2,17 @@ from itertools import cycle
 import random
 import sys
 import pygame
+import os
 from pygame.locals import *
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+    
 FPS = 30
 SCREENWIDTH  = 288
 SCREENHEIGHT = 512
@@ -62,24 +71,24 @@ def main():
 
     # numbers sprites for score display
     IMAGES['numbers'] = (
-        pygame.image.load('assets/sprites/0.png').convert_alpha(),
-        pygame.image.load('assets/sprites/1.png').convert_alpha(),
-        pygame.image.load('assets/sprites/2.png').convert_alpha(),
-        pygame.image.load('assets/sprites/3.png').convert_alpha(),
-        pygame.image.load('assets/sprites/4.png').convert_alpha(),
-        pygame.image.load('assets/sprites/5.png').convert_alpha(),
-        pygame.image.load('assets/sprites/6.png').convert_alpha(),
-        pygame.image.load('assets/sprites/7.png').convert_alpha(),
-        pygame.image.load('assets/sprites/8.png').convert_alpha(),
-        pygame.image.load('assets/sprites/9.png').convert_alpha()
+        pygame.image.load(resource_path('assets/sprites/0.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/1.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/2.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/3.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/4.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/5.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/6.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/7.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/8.png')).convert_alpha(),
+        pygame.image.load(resource_path('assets/sprites/9.png')).convert_alpha()
     )
 
     # game over sprite
-    IMAGES['gameover'] = pygame.image.load('assets/sprites/gameover.png').convert_alpha()
+    IMAGES['gameover'] = pygame.image.load(resource_path('assets/sprites/gameover.png')).convert_alpha()
     # message sprite for welcome screen
-    IMAGES['message'] = pygame.image.load('assets/sprites/message.png').convert_alpha()
+    IMAGES['message'] = pygame.image.load(resource_path('assets/sprites/message.png')).convert_alpha()
     # base (ground) sprite
-    IMAGES['base'] = pygame.image.load('assets/sprites/base.png').convert_alpha()
+    IMAGES['base'] = pygame.image.load(resource_path('assets/sprites/base.png')).convert_alpha()
 
     # sounds
     if 'win' in sys.platform:
@@ -87,31 +96,31 @@ def main():
     else:
         soundExt = '.ogg'
 
-    SOUNDS['die']    = pygame.mixer.Sound('assets/audio/die' + soundExt)
-    SOUNDS['hit']    = pygame.mixer.Sound('assets/audio/hit' + soundExt)
-    SOUNDS['point']  = pygame.mixer.Sound('assets/audio/point' + soundExt)
-    SOUNDS['swoosh'] = pygame.mixer.Sound('assets/audio/swoosh' + soundExt)
-    SOUNDS['wing']   = pygame.mixer.Sound('assets/audio/wing' + soundExt)
+    SOUNDS['die']    = pygame.mixer.Sound(resource_path('assets/audio/die' + soundExt))
+    SOUNDS['hit']    = pygame.mixer.Sound(resource_path('assets/audio/hit' + soundExt))
+    SOUNDS['point']  = pygame.mixer.Sound(resource_path('assets/audio/point' + soundExt))
+    SOUNDS['swoosh'] = pygame.mixer.Sound(resource_path('assets/audio/swoosh' + soundExt))
+    SOUNDS['wing']   = pygame.mixer.Sound(resource_path('assets/audio/wing' + soundExt))
 
     while True:
         # select random background sprites
         randBg = random.randint(0, len(BACKGROUNDS_LIST) - 1)
-        IMAGES['background'] = pygame.image.load(BACKGROUNDS_LIST[randBg]).convert()
+        IMAGES['background'] = pygame.image.load(resource_path(BACKGROUNDS_LIST[randBg])).convert()
 
         # select random player sprites
         randPlayer = random.randint(0, len(PLAYERS_LIST) - 1)
         IMAGES['player'] = (
-            pygame.image.load(PLAYERS_LIST[randPlayer][0]).convert_alpha(),
-            pygame.image.load(PLAYERS_LIST[randPlayer][1]).convert_alpha(),
-            pygame.image.load(PLAYERS_LIST[randPlayer][2]).convert_alpha(),
+            pygame.image.load(resource_path(PLAYERS_LIST[randPlayer][0])).convert_alpha(),
+            pygame.image.load(resource_path(PLAYERS_LIST[randPlayer][1])).convert_alpha(),
+            pygame.image.load(resource_path(PLAYERS_LIST[randPlayer][2])).convert_alpha(),
         )
 
         # select random pipe sprites
         pipeindex = random.randint(0, len(PIPES_LIST) - 1)
         IMAGES['pipe'] = (
             pygame.transform.flip(
-                pygame.image.load(PIPES_LIST[pipeindex]).convert_alpha(), False, True),
-            pygame.image.load(PIPES_LIST[pipeindex]).convert_alpha(),
+                pygame.image.load(resource_path(PIPES_LIST[pipeindex])).convert_alpha(), False, True),
+            pygame.image.load(resource_path(PIPES_LIST[pipeindex])).convert_alpha(),
         )
 
         # hitmask for pipes
