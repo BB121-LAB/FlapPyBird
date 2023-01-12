@@ -167,7 +167,7 @@ def showWelcomeAnimation():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP or event.key == K_w):
+            if event.type == KEYDOWN and event.key in [K_SPACE, K_UP, K_w]:
                 # make first flap sound and return values for mainGame
                 SOUNDS['wing'].play()
                 return {
@@ -238,7 +238,7 @@ def mainGame(movementInfo):
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP or event.key == K_w):
+            if event.type == KEYDOWN and event.key in [K_SPACE, K_UP, K_w]:
                 if playery > -2 * IMAGES['player'][0].get_height():
                     playerVelY = playerFlapAcc
                     playerFlapped = True
@@ -353,7 +353,7 @@ def showGameOverScreen(crashInfo):
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            if event.type == KEYDOWN and event.key in [K_SPACE, K_UP, K_w]:
                 if playery + playerHeight >= BASEY - 1:
                     return
 
